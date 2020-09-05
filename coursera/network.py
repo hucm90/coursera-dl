@@ -5,6 +5,7 @@ some data and so on.
 
 import json
 import logging
+import urllib
 
 import requests
 
@@ -45,7 +46,7 @@ def get_reply(session, url, post=False, data=None, headers=None, quiet=False):
                                headers=request_headers)
     prepared_request = session.prepare_request(request)
 
-    reply = session.send(prepared_request)
+    reply = session.send(prepared_request, proxies=urllib.request.getproxies())
 
     try:
         reply.raise_for_status()
